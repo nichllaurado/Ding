@@ -5,6 +5,23 @@ body {
     background-color: #debded;
 }
 
+h1 {
+    color: purple;
+    font-size: 40pt;
+    font-family: arial;
+    margin: auto;
+    text-align: center;
+    margin-top: 45px;
+}
+
+p {
+    font-size: 20pt;
+    color: grey;
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center;
+}
+
 header {
     background-color: #333;
     color: white;
