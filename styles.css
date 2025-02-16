@@ -1,12 +1,16 @@
+/* Dark logo color #A020F0
+   Light logo color #DEBDED
+*/
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #debded;
+    background-color: whitesmoke;
 }
 
 h1 {
-    color: purple;
+    color: #debded;
     font-size: 40pt;
     font-family: arial;
     margin: auto;
@@ -114,14 +118,17 @@ form {
 }
 
 .sidebar button:hover {
-    background-color: #f2f5f8;
+    background-color: #debded;
     color: #56096c;
 }
 
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
     #home-icon {
-        content: url('images/ding_dark_logo_final.png');
+        content: url('images/ding_logo_final.png');
+    }
+    body {
+        background-color: black;
     }
 }
 
@@ -158,6 +165,7 @@ form {
 }
 
 .return button {
+    left: 10px;
     width: 120px;
     padding: 10px;
     font-size: 16px;
