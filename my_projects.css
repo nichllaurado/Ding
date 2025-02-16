@@ -14,11 +14,11 @@ h1 {
     margin-top: 45px;
 }
 
-/* Logo (Top Right Corner) */
+/* Logo (Top Left Corner) */
 .logo-button {
     position: absolute;
     top: 10px;
-    right: 10px;
+    left: 10px;
     background: none;
     border: none;
     padding: 0;
@@ -34,7 +34,7 @@ h1 {
 .return {
     position: absolute;
     top: 70px; /* Slightly below the logo */
-    right: 10px;
+    left: 10px;
 }
 
 .return button {
