@@ -87,3 +87,17 @@ button {
 button:hover {
     background-color: #debded;
 }
+
+.return button {
+    background-color: #56096c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.return button:hover {
+    background-color: #debded;
+}
