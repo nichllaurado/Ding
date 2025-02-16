@@ -20,14 +20,14 @@ h1 {
 
 p {
     font-size: 20pt;
-    color: grey;
+    color: #3b3b38;
     margin-left: 20%;
     margin-right: 20%;
     text-align: center;
 }
 
 header {
-    background-color: #333;
+    background-color: #3b3b38;
     color: whitesmoke;
     padding: 20px;
     text-align: center;
@@ -66,7 +66,7 @@ section {
 }
 
 footer {
-    background-color: #333;
+    background-color: #3b3b38;
     color: whitesmoke;
     text-align: center;
     padding: 10px;
@@ -78,7 +78,7 @@ form {
     align-items: center;
     padding: 20px;
     border: 2px solid whitesmoke;
-    background-color: #debdeb;
+    background-color: #a020f0;
     margin: auto;
 }
 
@@ -222,6 +222,17 @@ form {
     background-color: #debded;
 }
 
+.center-image {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.enlarge-image {
+    width: 60%;
+    height: 60%;
+}
+
 label {
     margin-top: 10px;
     font-weight: bold;
@@ -240,10 +251,13 @@ input, textarea, button {
         content: url('images/ding_logo_final.png');
     }
     body {
-        background-color: black;
+        background-color: #3b3b38;
     }
     h1 {
         color: #a020f0;
+    }
+    form {
+        background-color: #debded;
     }
 }
 
