@@ -3,7 +3,7 @@
 */
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     margin: 0;
     padding: 0;
     background-color: whitesmoke;
@@ -12,7 +12,7 @@ body {
 h1 {
     color: #a020f0;
     font-size: 40pt;
-    font-family: arial;
+    font-family: 'Courier New', Courier, monospace;
     margin: auto;
     text-align: center;
     margin-top: 45px;
@@ -20,6 +20,7 @@ h1 {
 
 p {
     font-size: 20pt;
+    font-family: 'Courier New', Courier, monospace;
     color: #3b3b38;
     margin-left: 20%;
     margin-right: 20%;
@@ -78,7 +79,7 @@ form {
     align-items: center;
     padding: 20px;
     border: 2px solid whitesmoke;
-    background-color: #a020f0;
+    background-color: #debded;
     margin: auto;
 }
 
@@ -86,8 +87,10 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 50vh;
+    width: 30vw;
     margin: auto;
+    border-radius: 5px;
 }
 
 #home-icon {
@@ -229,8 +232,7 @@ form {
 }
 
 .enlarge-image {
-    width: 60%;
-    height: 60%;
+    width: 30vw;
 }
 
 label {
@@ -245,6 +247,13 @@ input, textarea, button {
     border-radius: 5px;
 }
 
+label {
+    font-size: small;
+    font-family: 'Courier New', Courier, monospace;
+    font-variant: small-caps;
+    color: #3b3b38;
+}
+
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
     #home-icon {
@@ -255,6 +264,12 @@ input, textarea, button {
     }
     h1 {
         color: #a020f0;
+    }
+    p {
+        color: whitesmoke;
+    }
+    label {
+        color: whitesmoke;
     }
     form {
         background-color: #debded;

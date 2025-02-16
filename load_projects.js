@@ -1,28 +1,23 @@
-async function loadProjects() {
+document.addEventListener("DOMContentLoaded", async () => {
+    const token = localStorage.getItem("token"); // Get user token
+    if (!token) return (window.location.href = "login.html");
+
     try {
-        const response = await fetch('http://localhost:3000/projects');
+        const response = await fetch("/api/projects", {
+            headers: { Authorization: `Bearer ${token}` }
+        });
         const projects = await response.json();
 
-        const container = document.getElementById('projects-container');
-        container.innerHTML = ''; // Clear previous content
-
-        projects.forEach(project => {
-            const projectElement = document.createElement('div');
-            projectElement.classList.add('project-card');
-            projectElement.innerHTML = `
-                <h2>${project.title}</h2>
-                <p>${project.description}</p>
-                <video width="300" controls>
-                    <source src="${project.video_url}" type="video/mp4">
-                    Your browser does not support video playback.
-                </video>
-                <p><strong>Tags:</strong> ${project.tags.join(', ')}</p>
-            `;
-            container.appendChild(projectElement);
-        });
+        const container = document.getElementById("projects-container");
+        container.innerHTML = projects.length
+            ? projects.map(proj => `<div class="project-card">
+                <h2>${proj.title}</h2>
+                <p>${proj.description}</p>
+                <button onclick="navigate('project.html?id=${proj.id}')">View Project</button>
+            </div>`).join("")
+            : "<p>No projects found.</p>";
     } catch (error) {
-        console.error('Error loading projects:', error);
+        console.error(error);
+        document.getElementById("projects-container").innerHTML = "<p>Error loading projects.</p>";
     }
-}
-
-window.onload = loadProjects;
+});
