@@ -73,6 +73,22 @@ form {
     margin: auto;
 }
 
+/* home logo button */
+.logo-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.logo-button img {
+    width: 50px; /* Adjust size as needed */
+    height: 50px;
+}
+
 /* Sidebar styles */
 .sidebar {
     position: fixed;
@@ -130,4 +146,17 @@ form {
 
 .search-container button:hover {
     background-color: #6d0b85;
+}
+
+.return button {
+    width: 120px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #56096c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 50px; /* Round buttons */
+    transition: background-color 0.3s ease;
 }
