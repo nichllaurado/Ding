@@ -1,23 +1,28 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    const token = localStorage.getItem("token"); // Get user token
-    if (!token) return (window.location.href = "login.html");
+document.addEventListener("DOMContentLoaded", async function () {
+    const projectsContainer = document.getElementById("projects-container");
 
     try {
-        const response = await fetch("/api/projects", {
-            headers: { Authorization: `Bearer ${token}` }
-        });
-        const projects = await response.json();
+        const response = await fetch("http://localhost:3000/api/projects");
+        if (!response.ok) throw new Error("Failed to fetch projects");
 
-        const container = document.getElementById("projects-container");
-        container.innerHTML = projects.length
-            ? projects.map(proj => `<div class="project-card">
-                <h2>${proj.title}</h2>
-                <p>${proj.description}</p>
-                <button onclick="navigate('project.html?id=${proj.id}')">View Project</button>
-            </div>`).join("")
-            : "<p>No projects found.</p>";
+        const projects = await response.json();
+        projectsContainer.innerHTML = ""; // Clear "Loading projects..."
+
+        if (projects.length === 0) {
+            projectsContainer.innerHTML = "<p>No projects found.</p>";
+        } else {
+            projects.forEach(project => {
+                const projectElement = document.createElement("div");
+                projectElement.classList.add("project");
+                projectElement.innerHTML = `
+                    <h3>${project.title}</h3>
+                    <p>${project.description}</p>
+                `;
+                projectsContainer.appendChild(projectElement);
+            });
+        }
     } catch (error) {
-        console.error(error);
-        document.getElementById("projects-container").innerHTML = "<p>Error loading projects.</p>";
+        console.error("Error loading projects:", error);
+        projectsContainer.innerHTML = "<p>Error loading projects.</p>";
     }
 });
