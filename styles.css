@@ -192,6 +192,8 @@ form {
 }
 
 .start-project {
+    justify-content: center;
+    align-items: center;
     position: fixed;
     left: 10px;
     top: 100px; /* Adjusted position for visibility */
