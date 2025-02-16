@@ -68,18 +68,19 @@ footer {
     padding: 10px;
 }
 
+#userForm {
+    align-items: center;
+    margin: auto;
+}
+
 /* Sidebar styles */
 .sidebar {
     position: fixed;
     left: 10px;
-    top: 100px;
+    top: 600px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-/* Button styles */
-.sidebar button {
     width: 120px;
     padding: 10px;
     font-size: 16px;
@@ -88,8 +89,9 @@ footer {
     border: none;
     cursor: pointer;
     text-align: left;
+    border-radius: 50px;
 }
 
 .sidebar button:hover {
-    background-color: #0056b3;
+    background-color: #f2f5f8;
 }

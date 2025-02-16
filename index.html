@@ -16,16 +16,7 @@
         Sriegler, NLIerrraduo, CSWILson
         change
     </p>
-    
-    <div class="sidebar">
-      <button onclick="navigate('home.html')">Home</button>
-      <button onclick="navigate('explore.html')">Explore</button>
-      <button onclick="navigate('message.html')">Message</button>
-      <button onclick="navigate('projects.html')">Projects</button>
-      <button onclick="navigate('learn.html')">Learn</button>
-    </div>
-    
-    <form action="process.php" method="post">
+    <form action="process.php" method="post" id="userForm">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required><br><br>
       
@@ -33,6 +24,7 @@
       <input type="email" id="email" name="email" required><br><br>
       
       <input type="submit" value="Submit">
+    </form>
   </body>
 </html>
 
