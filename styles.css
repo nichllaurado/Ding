@@ -118,6 +118,15 @@ form {
     color: #56096c;
 }
 
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    #home-icon {
+        content: url('images/ding_dark_logo_final.png');
+    }
+}
+
+/* search bar */
+
 .search-container {
     display: flex;
     justify-content: center;
