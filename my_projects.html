@@ -10,22 +10,24 @@
 <body>
     <h1>My Projects</h1>
 
-    <button onclick="navigate('home.html')" class = "logo-button">
+    <button onclick="navigate('home.html')" class="logo-button">
         <img id="home-icon" src="images/ding_dark_logo_final.png" alt="Home">
     </button>
     
     <!-- Go Back Button -->
     <div class="return">
         <button onclick="history.back()">Return</button>
-        <script src="navigation.js"></script>
-        </div>
+    </div>
     
     <!-- Start a Project Button -->
     <div class="start-project">
         <button onclick="navigate('start_project.html')">Start a Project</button>
     </div>
-    
-    <script src="navigation.js"></script>
-</body>
 
+    <!-- Projects Container -->
+    <div id="projects-container"></div>
+
+    <script src="navigation.js"></script>
+    <script src="start_projects.js"></script>
+</body>
 </html>
