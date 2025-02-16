@@ -8,39 +8,37 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>New Project</h1>
-    
-    <button onclick="history.back()">Return</button>
 
+    <h1>New Project</h1>
 
     <form id="projectForm">
         <!-- Project Title -->
         <label for="title">Project Title:</label>
-        <input type="text" id="title" name="title" placeholder="project title" required>
+        <input type="text" id="title" name="title" required>
 
         <!-- Project Description -->
         <label for="description">Project Description:</label>
-        <textarea id="description" name="description" placeholder="project description" required></textarea>
+        <textarea id="description" name="description" required></textarea>
 
-        <!-- Video Upload -->
-        <label for="video">Upload Video:</label>
-        <input type="file" id="video" name="video" accept="video/*" required>
+        <!-- Custom Video Upload Button -->
+        <label for="videoUpload" class="custom-upload-button">Upload or Record Video</label>
+        <input type="file" id="videoUpload" name="video" accept="video/*" capture="camera" hidden>
 
         <!-- Invite Users -->
-        <label for="invite">Invite Users (comma-separated usernames):</label>
-        <input type="text" id="invite" name="invite">
+        <button type="button" id="inviteUsers">Invite Users</button>
 
         <!-- Tags -->
-        <label for="tags">Tags (comma-separated):</label>
-        <input type="text" id="tags" placeholder="tags" name="tags">
+        <label for="tags">Tags:</label>
+        <input type="text" id="tags" name="tags" placeholder="Enter tags...">
 
         <!-- Submit Button -->
-        <div class="start-project">
         <button type="submit">Create Project</button>
-        </div>
-    
     </form>
 
+    <!-- Return Button -->
+    <button onclick="history.back()">Return</button>
+
     <script src="project.js"></script>
+
 </body>
 </html>
