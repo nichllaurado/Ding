@@ -72,7 +72,7 @@ footer {
 .sidebar {
     position: fixed;
     left: 10px;
-    top: 50px;
+    top: 100px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -83,7 +83,7 @@ footer {
     width: 120px;
     padding: 10px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: #56096c;
     color: white;
     border: none;
     cursor: pointer;
