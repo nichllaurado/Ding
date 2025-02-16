@@ -101,3 +101,33 @@ form {
     background-color: #f2f5f8;
     color: #56096c;
 }
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.search-container input {
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+.search-container button {
+    padding: 8px 15px;
+    margin-left: 10px;
+    border: none;
+    background-color: #56096c;
+    color: white;
+    border-radius: 50px; 
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-container button:hover {
+    background-color: #6d0b85;
+}
