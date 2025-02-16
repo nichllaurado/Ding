@@ -9,15 +9,18 @@
 </head>
 <body>
     <h1>New Project</h1>
+    
+    <button onclick="history.back()">Return</button>
+
 
     <form id="projectForm">
         <!-- Project Title -->
         <label for="title">Project Title:</label>
-        <input type="text" id="title" name="title" required>
+        <input type="text" id="title" name="title" placeholder="project title" required>
 
         <!-- Project Description -->
         <label for="description">Project Description:</label>
-        <textarea id="description" name="description" required></textarea>
+        <textarea id="description" name="description" placeholder="project description" required></textarea>
 
         <!-- Video Upload -->
         <label for="video">Upload Video:</label>
@@ -29,7 +32,7 @@
 
         <!-- Tags -->
         <label for="tags">Tags (comma-separated):</label>
-        <input type="text" id="tags" name="tags">
+        <input type="text" id="tags" placeholder="tags" name="tags">
 
         <!-- Submit Button -->
         <div class="start-project">
@@ -37,8 +40,6 @@
         </div>
     
     </form>
-
-    <button onclick="history.back()">Return</button>
 
     <script src="project.js"></script>
 </body>
