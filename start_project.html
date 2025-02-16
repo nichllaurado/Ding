@@ -13,19 +13,19 @@
 
     <form id="projectForm">
         <!-- Project Title -->
-        <label for="title">Project Title:</label>
+        <label for="title">Title:</label>
         <input type="text" id="title" name="title" required>
 
         <!-- Project Description -->
-        <label for="description">Project Description:</label>
+        <label for="description">Description:</label>
         <textarea id="description" name="description" required></textarea>
 
         <!-- Custom Video Upload Button -->
-        <label for="videoUpload" class="custom-upload-button">Upload or Record Video</label>
+        <label for="videoUpload" class="custom-upload-button">Upload Content</label>
         <input type="file" id="videoUpload" name="video" accept="video/*" capture="camera" hidden>
 
         <!-- Invite Users -->
-        <button type="button" id="inviteUsers">Invite Users</button>
+        <button type="button" id="inviteUsers">Invite</button>
 
         <!-- Tags -->
         <label for="tags">Tags:</label>
@@ -40,7 +40,7 @@
     <button onclick="history.back()">Return</button>
     </div>
     
-    <script src="project.js"></script>
+    <script src="load_projects.js"></script>
 
 </body>
 </html>
