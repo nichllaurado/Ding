@@ -190,3 +190,17 @@ form {
 .return button:hover {
     background-color: #debded;
 }
+
+.start-project {
+    left: 10px;
+    width: 120px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #56096c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 50px; /* Round buttons */
+    transition: background-color 0.3s ease;
+}

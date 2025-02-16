@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start a Project - Ding</title>
+    <link rel="icon" href="images/ding_logo_final.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Start a New Project</h1>
+
+    <form id="projectForm">
+        <!-- Project Title -->
+        <label for="title">Project Title:</label>
+        <input type="text" id="title" name="title" required>
+
+        <!-- Project Description -->
+        <label for="description">Project Description:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <!-- Video Upload -->
+        <label for="video">Upload Video:</label>
+        <input type="file" id="video" name="video" accept="video/*" required>
+
+        <!-- Invite Users -->
+        <label for="invite">Invite Users (comma-separated usernames):</label>
+        <input type="text" id="invite" name="invite">
+
+        <!-- Tags -->
+        <label for="tags">Tags (comma-separated):</label>
+        <input type="text" id="tags" name="tags">
+
+        <!-- Submit Button -->
+        <button type="submit">Create Project</button>
+    </form>
+
+    <button onclick="history.back()">Return</button>
+
+    <script src="project.js"></script>
+</body>
+</html>
