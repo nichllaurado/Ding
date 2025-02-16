@@ -126,6 +126,11 @@ form {
     color: #56096c;
 }
 
+.sidebar button:disabled {
+    background-color: #debded;
+    color: #56096c;
+}
+
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
     #home-icon {
@@ -182,6 +187,6 @@ form {
     transition: background-color 0.3s ease;
 }
 
-.search-container button:hover {
+.return button:hover {
     background-color: #debded;
 }
