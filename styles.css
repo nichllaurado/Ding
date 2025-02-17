@@ -261,7 +261,7 @@ label {
 
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
-    #home-icon {
+    #home-icon, #dingLogo {
         content: url('images/ding_logo_final.png');
     }
     body {
@@ -278,9 +278,6 @@ label {
     }
     form {
         background-color: #debded;
-    }
-    #dingLogo, #home-icon {
-        src="images/ding_logo_final.png"
     }
 }
 
