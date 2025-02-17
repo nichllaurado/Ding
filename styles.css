@@ -120,8 +120,10 @@ form {
 }
 
 .logo-button img {
-    width: 50px; /* Adjust size as needed */
-    height: 50px;
+    width: 3.5vw;
+    border: 0.25vw solid;
+    border-color: #a020f0;
+    border-radius: 0.5vw;
 }
 
 /* Sidebar styles */
@@ -302,6 +304,9 @@ label {
     }
     form {
         background-color: #debded;
+    }
+    .logo-button img {
+        border-color: #debdeb;
     }
 }
 
