@@ -279,5 +279,8 @@ label {
     form {
         background-color: #debded;
     }
+    #dingLogo, #home-icon {
+        src="images/ding_logo_final.png"
+    }
 }
 
