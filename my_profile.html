@@ -5,24 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile - Ding</title>
     <link rel="icon" href="images/ding_logo_final.png">
-    <link rel="stylesheet" href="my_projects.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>My Profile</h1>
-
-    <!-- Home Button -->
-    <button onclick="navigate('home.html')" class="logo-button">
-        <img id="home-icon" src="images/ding_dark_logo_final.png" alt="Home">
-    </button>
     
     <!-- Go Back Button -->
     <div class="return">
         <button onclick="history.back()">Return</button>
     </div>
+    <button onclick="navigate('home.html')" class="logo-button">
+        <img id="home-icon" src="images/ding_dark_logo_final.png" alt="Home">
+    </button>
+
+    <div class = "container">
+        <h2>Skills</h2>
+        <button onclick="addItem()">+</button>
+        <ul id="list" class="list-box">
+            <!-- List items will be added here -->
+        </ul>
+
+    </div>
+
 
     
-    
     <script src="navigation.js"></script>
-    <script src="load_projects.js"></script>
+    <script src="edit_profile.js"></script>
+
 </body>
 </html>
