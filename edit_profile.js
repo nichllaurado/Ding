@@ -1,3 +1,22 @@
+
+
+function changePicture() {
+
+}
+
+
+function toggleEdit() {
+    let box = document.getElementById("textBox");
+    if (box.contentEditable === "true") {
+        box.contentEditable = "false";
+    } else {
+        box.contentEditable = "true";
+        box.focus();
+    }
+}
+
+
+
 function addItem() {
     let list = document.getElementById("list");
     let newItem = document.createElement("li");
