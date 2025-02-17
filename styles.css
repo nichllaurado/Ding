@@ -11,7 +11,16 @@ body {
 
 h1 {
     color: #a020f0;
-    font-size: 40pt;
+    font-size: 2.5vw;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: auto;
+    text-align: center;
+    margin-top: 45px;
+}
+
+h1 {
+    color: #3b3b38;
+    font-size: 1.5vw;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: auto;
     text-align: center;
@@ -19,7 +28,7 @@ h1 {
 }
 
 p {
-    font-size: 20pt;
+    font-size: 0.5pt;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #3b3b38;
     margin-left: 20%;
@@ -144,7 +153,7 @@ form {
 
 
 /* Sidebar styles */
-.sidebar {
+.sidebar, .return {
     position: fixed;
     left: 0.7vw;
     top: 12vh; /* Adjusted position for visibility */
@@ -159,15 +168,18 @@ button {
 }
 
 /* Button styles */
-.sidebar button, .fixed-buttons button {
+.sidebar button, .fixed-buttons button, .return button {
     width: 7vw;
-    padding: 10px;
-    font-size: 16px;
+    height: 1.4vw;
+    padding: 3px;
+    font-size: 1vw;
     /* background-color: #a020f0;
     color: whitesmoke; */
     border: none;
     cursor: pointer;
-    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
     border-radius: 50px; /* Round buttons */
     transition: background-color 0.3s ease;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -219,20 +231,20 @@ button:hover, button:disabled {
     background-color: #debdeb;
 } */
 
-.return button {
+/* .return button {
     left: 10px;
     width: 120px;
     padding: 10px;
     font-size: 16px;
-    /* background-color: #a020f0;
-    color: whitesmoke; */
+    background-color: #a020f0;
+    color: whitesmoke;
     border: none;
     cursor: pointer;
     text-align: center;
-    border-radius: 50px; /* Round buttons */
+    border-radius: 50px;
     transition: background-color 0.3s ease;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
+} */
 
 /* .return button:hover {
     background-color: #debded;
