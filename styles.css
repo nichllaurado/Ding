@@ -98,11 +98,21 @@ form {
     position: fixed;
 }
 
+.fixed-buttons {
+    position: fixed;
+    left: 10px; /* Adjust spacing from the right */
+    top: 10%;
+    transform: translateY(-20%); /* Center vertically */
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 10px; /* Space between buttons */
+}
+
 /* home logo button */
 .logo-button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
+    position: fixed;
+    top: 0.7vh;
+    left: 0.7vw;
     background: none;
     border: none;
     padding: 0;
@@ -117,20 +127,25 @@ form {
 /* Sidebar styles */
 .sidebar {
     position: fixed;
-    left: 10px;
-    top: 100px; /* Adjusted position for visibility */
+    left: 0.7vw;
+    top: 12vh; /* Adjusted position for visibility */
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-/* Button styles */
-.sidebar button {
-    width: 120px;
-    padding: 10px;
-    font-size: 16px;
+button {
     background-color: #a020f0;
     color: whitesmoke;
+}
+
+/* Button styles */
+.sidebar button, .fixed-buttons button {
+    width: 7vw;
+    padding: 10px;
+    font-size: 16px;
+    /* background-color: #a020f0;
+    color: whitesmoke; */
     border: none;
     cursor: pointer;
     text-align: center;
@@ -139,7 +154,12 @@ form {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.sidebar button:hover {
+button:hover, button:disabled {
+    background-color: #debdeb;
+    color: #3b3b38;
+}
+
+/* .sidebar button:hover {
     background-color: #debded;
     color: #a020f0;
 }
@@ -147,7 +167,7 @@ form {
 .sidebar button:disabled {
     background-color: #debded;
     color: #a020f0;
-}
+} */
 
 /* search bar */
 .search-container {
@@ -169,24 +189,24 @@ form {
     padding: 8px 15px;
     margin-left: 10px;
     border: none;
-    background-color: #a020f0;
-    color: whitesmoke;
+    /* background-color: #a020f0;
+    color: whitesmoke; */
     border-radius: 50px; 
     cursor: pointer;
     font-size: 16px;
 }
 
-.search-container button:hover {
+/* .search-container button:hover {
     background-color: #debdeb;
-}
+} */
 
 .return button {
     left: 10px;
     width: 120px;
     padding: 10px;
     font-size: 16px;
-    background-color: #a020f0;
-    color: whitesmoke;
+    /* background-color: #a020f0;
+    color: whitesmoke; */
     border: none;
     cursor: pointer;
     text-align: center;
@@ -195,9 +215,9 @@ form {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.return button:hover {
+/* .return button:hover {
     background-color: #debded;
-}
+} */
 
 .start-project {
     justify-content: center;
@@ -215,8 +235,8 @@ form {
     width: 140px;
     padding: 10px;
     font-size: 12px;
-    background-color: #a020f0;
-    color: whitesmoke;
+    /* background-color: #a020f0;
+    color: whitesmoke; */
     border: none;
     cursor: pointer;
     text-align: center;
@@ -225,9 +245,9 @@ form {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.start-project button:hover {
+/* .start-project button:hover {
     background-color: #debded;
-}
+} */
 
 .center-image {
     display: block;
@@ -244,7 +264,7 @@ label {
     font-weight: bold;
 }
 
-input, textarea, button {
+input, textarea {
     padding: 10px;
     margin: 10px;
     border: 2px solid whitesmoke;
@@ -272,6 +292,10 @@ label {
     }
     p {
         color: whitesmoke;
+    }
+    button {
+        background-color: #debdeb;
+        color: #3b3b38
     }
     label {
         color: whitesmoke;
