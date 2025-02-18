@@ -129,7 +129,7 @@ body.border-container {
 /* home logo button */
 .logo-button {
     position: fixed;
-    top: 0.7vh;
+    top: 0.7vw;
     left: 0.7vw;
     background: none;
     border: none;
