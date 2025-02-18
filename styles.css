@@ -92,6 +92,15 @@ form {
     margin: auto;
 }
 
+body.border-container {
+    position: fixed;
+    border: 0.4vw solid;
+    border-color: #a020f0;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
 .form-container {
     display: flex;
     justify-content: center;
@@ -128,7 +137,7 @@ form {
     cursor: pointer;
 }
 
-.logo-button img {
+img.logo-button {
     width: 3.5vw;
     border: 0.25vw solid;
     border-color: #a020f0;
@@ -147,7 +156,7 @@ form {
     cursor: pointer;
 }
 
-.user-button img {
+img.user-button {
     width: 3.5vw;
 }
 
@@ -168,7 +177,7 @@ button {
 }
 
 /* Button styles */
-.sidebar button, .fixed-buttons button, .return button {
+button.sidebar, button.fixed-buttons, button.return {
     width: 7vw;
     height: 1.4vw;
     padding: 3px;
@@ -208,7 +217,7 @@ button:hover, button:disabled {
     margin-top: 20px;
 }
 
-.search-container input {
+input.search-container {
     width: 300px;
     padding: 8px;
     border: 1px solid whitesmoke;
@@ -216,7 +225,7 @@ button:hover, button:disabled {
     font-size: 16px;
 }
 
-.search-container button {
+button.search-container {
     padding: 8px 15px;
     margin-left: 10px;
     border: none;
@@ -261,7 +270,7 @@ button:hover, button:disabled {
     gap: 10px;
 }
 
-.start-project button {
+button.start-project {
     left: 10px;
     width: 140px;
     padding: 10px;
@@ -287,7 +296,7 @@ button:hover, button:disabled {
 }
 
 .enlarge-image {
-    width: 30vw;
+    width: 20vw;
 }
 
 label {
@@ -334,8 +343,11 @@ label {
     form {
         background-color: #debded;
     }
-    .logo-button img {
+    img.logo-button {
         border-color: #debdeb;
+    }
+    body.border-container {
+        border-color: #debded;
     }
 }
 
