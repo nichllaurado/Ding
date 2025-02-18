@@ -136,6 +136,10 @@ body.border-container {
     position: fixed;
 }
 
+#user-icon {
+    position: fixed;
+}
+
 /* .fixed-buttons {
     position: fixed;
     left: 10px;
