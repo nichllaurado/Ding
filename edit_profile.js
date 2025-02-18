@@ -6,7 +6,7 @@ function changePicture() {
 
 
 function toggleEdit() {
-    let box = document.getElementById("textBox");
+    let box = document.getElementById("biographyBox");
     if (box.contentEditable === "true") {
         box.contentEditable = "false";
     } else {

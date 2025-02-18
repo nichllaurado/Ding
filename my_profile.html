@@ -16,6 +16,8 @@
         justify-content: center;
         max-width: 20vw;
         margin: auto;
+        margin-top: 1vw;
+        margin-bottom: 1vw;
         padding: 2vw;
         background: white;
         border-radius: 10px;
@@ -23,19 +25,15 @@
     }
 
     .profile-icon {
-        justify-content: center;
-        align-items: center;
-        max-width: 20vw;
-        margin: auto;
-        padding: 2vw;
-        background: none;
-        border: none;
-        padding: 0;
+        
+
+        width: 4.5vw;
+
  
     }
 
-    .profile-icon img {
-        width: 3.5vw;
+    .profile-container img {
+        width: 4.5vw;
     }
 
 
@@ -43,13 +41,15 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        justify-content: left;
+        justify-content: start;
         max-width: 20vw;
         margin: auto;
         padding: 2vw;
         background: white;
         border-radius: 10px;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 1vw;
+        margin-bottom: 1vw;
     }
 
     .analytics-box {
@@ -57,16 +57,16 @@
         flex-direction: column;
         align-items: flex-start; /* Aligns title to top-left */
         justify-content: flex-start;
-        width: 100%;
-        padding: 1vw;
+        max-width: 20vw;
+        width: 20vw;
+        padding: 2vw;
         background: white;
         border-radius: 10px;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .analytics-title {
-        font-size: 1.2em;
-        font-weight: bold;
+        
         margin-bottom: 10px;
         text-align: start;
     }
@@ -104,12 +104,14 @@
 
 
    
-    <div class= "container" id="biographyBox" contenteditable="false">Biography
+    <div class= "container">
+
+    <div id="biographyBox" contenteditable="false">Biography</div>
     <button onclick="toggleEdit()">Edit</button>
     </div>
 
     <div class="container analytics-box">
-        <p class="analytics-title">Analytics</p>
+        Analytics
         <div class="analytics-content">Your analytics data will appear here.</div>
     </div>
 
