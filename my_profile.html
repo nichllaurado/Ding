@@ -9,13 +9,31 @@
 
     <style>
         
-    
-    .profile-icon {
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 20vw;
+        margin: auto;
+        padding: 2vw;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-            justify-content: center;
-            align-items: center;
+    .profile-icon {
+        justify-content: center;
+        align-items: center;
+        max-width: 20vw;
+        margin: auto;
+        padding: 2vw;
+        background: none;
+        border: none;
+        padding: 0;
  
-        }
+    }
+
     .profile-icon img {
         width: 3.5vw;
     }
@@ -24,15 +42,42 @@
     .container {
         display: flex;
         flex-direction: column;
-        align-items: left;
+        align-items: flex-start;
         justify-content: left;
-        max-width: 5vw;
+        max-width: 20vw;
         margin: auto;
         padding: 2vw;
         background: white;
         border-radius: 10px;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
+
+    .analytics-box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Aligns title to top-left */
+        justify-content: flex-start;
+        width: 100%;
+        padding: 1vw;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .analytics-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-align: start;
+    }
+
+    .analytics-content {
+        align-self: flex-end; /* Centers content horizontally */
+        text-align: end;
+        width: 100%;
+        padding-top: 20px;
+    }
+
 
     </style>
 
@@ -50,7 +95,7 @@
     </button>
    
 
-    <div class="container">
+    <div class="profile-container">
         <button onclick="changePicture()" class="profile-icon">
             <img id="user-icon" src="images/user_img_placeholder.png" alt="Profile">
         </button>
@@ -59,18 +104,19 @@
 
 
    
-    <div class= "container" id="textBox" contenteditable="false">Biography
+    <div class= "container" id="biographyBox" contenteditable="false">Biography
     <button onclick="toggleEdit()">Edit</button>
     </div>
 
-    <div class= "container" id="textBox" contenteditable="false">Analytics
-
+    <div class="container analytics-box">
+        <p class="analytics-title">Analytics</p>
+        <div class="analytics-content">Your analytics data will appear here.</div>
     </div>
 
 
     <div class = "container">
-        Skills
-        <button onclick="addItem()">+</button>
+        <div>Skills</div>
+        <div><button onclick="addItem()">+</button></div>
         <ul id="list" class="list-box">
             
         </ul>
