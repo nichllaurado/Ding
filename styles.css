@@ -2,11 +2,16 @@
    Use background color #3b3b38 and light logo color #debded for dark mode
 */
 
+html {
+    overflow: auto;
+}
+
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
     padding: 0;
     background-color: whitesmoke;
+    overflow: auto;
 }
 
 h1 {
@@ -81,8 +86,13 @@ footer {
 }
 
 form {
+    width: 30%;
+    height: 50%;
+    max-width: 60%;
+    max-height: 100%;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     padding: 2vw;
     border: 0.5vw solid;
@@ -97,19 +107,28 @@ form label {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 2vh auto 1vh auto;
     text-align: center;
+    flex: 1;
+    vertical-align: middle;
 }
 
 form input {
-    width: 20vw;
-    height: 3vh;
+    width: 60%;
+    height: 10%;
+    min-width: 60%;
+    max-width: 60%;
+    min-height: 10%;
+    max-height: 10%;
     padding: 1vh 1vw;
     border: 0.1vw solid #3b3b38;
     border-radius: 80vw;
-    font-size: 2vw;
+    font-size: 1vw;
     text-align: center;
     vertical-align: middle;
     line-height: 1vh;
     align-items: center;
+    flex: 1;
+    box-sizing: border-box;
+    margin: auto;
 }
 
 body.border-container {

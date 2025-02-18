@@ -14,8 +14,8 @@ document.getElementById("userForm").addEventListener("submit", async function(ev
     const result = await response.json();
 
     if (response.ok) {
-      alert("Signup successful! Redirecting...");
-      window.location.href = "dashboard.html"; // Redirect user
+      alert("You're Signed Up!");
+      window.location.href = "home.html"; // Redirect user
     } else {
       document.getElementById("errorMessage").innerText = result.error;
     }
