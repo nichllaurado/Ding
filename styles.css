@@ -137,7 +137,7 @@ body.border-container {
     cursor: pointer;
 }
 
-img.logo-button {
+.logo-button img {
     width: 3.5vw;
     border: 0.25vw solid;
     border-color: #a020f0;
@@ -156,7 +156,7 @@ img.logo-button {
     cursor: pointer;
 }
 
-img.user-button {
+.user-button img {
     width: 3.5vw;
 }
 
@@ -177,7 +177,7 @@ button {
 }
 
 /* Button styles */
-button.sidebar, button.fixed-buttons, button.return {
+.sidebar button, .fixed-buttons button, .return button {
     width: 7vw;
     height: 1.4vw;
     padding: 3px;
@@ -217,7 +217,7 @@ button:hover, button:disabled {
     margin-top: 20px;
 }
 
-input.search-container {
+.search-container input {
     width: 300px;
     padding: 8px;
     border: 1px solid whitesmoke;
@@ -225,7 +225,7 @@ input.search-container {
     font-size: 16px;
 }
 
-button.search-container {
+.search-container button {
     padding: 8px 15px;
     margin-left: 10px;
     border: none;
@@ -270,7 +270,7 @@ button.search-container {
     gap: 10px;
 }
 
-button.start-project {
+.start-project button {
     left: 10px;
     width: 140px;
     padding: 10px;
@@ -343,7 +343,7 @@ label {
     form {
         background-color: #debded;
     }
-    img.logo-button {
+    .logo-button img {
         border-color: #debdeb;
     }
     body.border-container {
