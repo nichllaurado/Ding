@@ -6,6 +6,37 @@
     <title>My Profile - Ding</title>
     <link rel="icon" href="images/ding_logo_final.png">
     <link rel="stylesheet" href="styles.css">
+
+    <style>
+        
+    
+    .profile-icon {
+
+            justify-content: center;
+            align-items: center;
+ 
+        }
+    .profile-icon img {
+        width: 3.5vw;
+    }
+
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: left;
+        max-width: 5vw;
+        margin: auto;
+        padding: 2vw;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    </style>
+
+    
 </head>
 <body>
     <h1>My Profile</h1>
@@ -17,31 +48,32 @@
     <button onclick="navigate('home.html')" class="logo-button">
         <img id="home-icon" src="images/ding_dark_logo_final.png" alt="Home">
     </button>
+   
 
-
-    <!-- profile img -->
     <div class="container">
-        <button onclick="changePicture()" class="profile-image-button">
-            <img id="profile-image" src="images/user_img_placeholder.png" alt="profile picture">
+        <button onclick="changePicture()" class="profile-icon">
+            <img id="user-icon" src="images/user_img_placeholder.png" alt="Profile">
         </button>
-        
-        <h2>Username</h2>
-        
+        Username
     </div>
 
-    <!-- Biography -->
-    <div id="textBox" contenteditable="false">Biography</div>
+
+   
+    <div class= "container" id="textBox" contenteditable="false">Biography
     <button onclick="toggleEdit()">Edit</button>
+    </div>
+
+    <div class= "container" id="textBox" contenteditable="false">Analytics
+
+    </div>
 
 
-    <!-- Skills -->
     <div class = "container">
-        <h2>Skills</h2>
+        Skills
         <button onclick="addItem()">+</button>
         <ul id="list" class="list-box">
-            <!-- List items will be added here -->
+            
         </ul>
-
     </div>
 
 
