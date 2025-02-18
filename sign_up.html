@@ -8,19 +8,28 @@
     <link rel="icon" href="images/ding_dark_logo_final.png" id="dingLogo">
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body class="border-container">
+  <body>
     <img src="images/ding_dark_logo_final.png" alt="Logo" width="200" class="center-image enlarge-image" id="dingLogo">
     <p>
       By Dingers...For Dingers🛎️
     </p>
-    <form action="process.php" method="post" id="userForm" class="form-container">
+  
+    <form id="userForm">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required><br><br>
-      
+    
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" required><br><br>
-      
-      <input type="submit" value="Submit">
+    
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br><br>
+    
+      <input type="submit" value="Sign Up">
     </form>
+    
+    <p id="errorMessage" style="color:red;"></p>
+    
+    <script src="sign_up.js"> </script>
+  
   </body>
 </html>
