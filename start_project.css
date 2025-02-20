@@ -1,6 +1,6 @@
 /* General Page Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
     padding: 0;
     background-color: whitesmoke;
@@ -11,7 +11,7 @@ body {
 
 /* Title */
 h1 {
-    color: #debded;
+    color: #a020f0;
     font-size: 40pt;
     text-align: center;
     margin-top: 45px;
@@ -27,7 +27,7 @@ form {
     width: 90%;
     margin: auto;
     padding: 20px;
-    background: white;
+    background: whitesmoke;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -37,7 +37,7 @@ input, textarea {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid whitesmoke;
     border-radius: 5px;
 }
 
@@ -45,8 +45,8 @@ input, textarea {
 .custom-upload-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #56096c;
-    color: white;
+    background-color: #a020f0;
+    color: whitesmoke;
     border-radius: 50px;
     cursor: pointer;
     text-align: center;
@@ -60,8 +60,8 @@ input, textarea {
 
 /* Invite Users Button */
 #inviteUsers {
-    background-color: #56096c;
-    color: white;
+    background-color: #a020f0;
+    color: whitesmoke;
     padding: 10px 15px;
     border: none;
     border-radius: 50px;
@@ -75,8 +75,8 @@ input, textarea {
 
 /* Submit & Return Buttons */
 button {
-    background-color: #56096c;
-    color: white;
+    background-color: #a020f0;
+    color: whitesmoke;
     padding: 10px 15px;
     border: none;
     border-radius: 50px;
@@ -99,8 +99,8 @@ button:hover {
     width: 120px;
     padding: 10px;
     font-size: 16px;
-    background-color: #56096c;
-    color: white;
+    background-color: #a020f0;
+    color: whitesmoke;
     border: none;
     cursor: pointer;
     border-radius: 50px;
@@ -109,5 +109,5 @@ button:hover {
 
 .return button:hover {
     background-color: #debded;
-    color: #56096c;
+    color: #a020f0;
 }
