@@ -20,7 +20,7 @@
 
         <!-- Custom Video Upload Button -->
         <label for="videoUpload" class="custom-upload-button">Upload Content</label>
-        <input type="file" id="videoUpload" name="video" accept="video/*" capture="camera" hidden>
+        <input type="file" id="videoUpload" name="video" accept="video/*" onchange="previewVideo(event)" hidden>
 
         <!-- Invite Users -->
         <button type="button" id="inviteUsers">Invite</button>
@@ -38,7 +38,7 @@
         <button onclick="history.back()" class="return">Return</button>
     </div>
     
-    <script src="start_project.css"></script>
+    <script src="start_project.js"></script>
 
 </body>
 </html>
