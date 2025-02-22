@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const { Pool } = require('pg');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -81,6 +82,35 @@ app.post('/upload', upload.single('video'), async (req, res) => {
         console.error(err);
         res.status(500).json({ error: 'Failed to upload video' });
     }
+});
+
+// ====================== IMAGE UPLOAD ======================
+const storage = multer.diskStorage({
+    destination: "./uploads/", // Folder to store images
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
+    }
+});
+const upload = multer({ storage });
+
+// Handle Image Upload
+app.post("/upload", upload.single("profileImage"), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+    }
+
+    // Construct the image URL
+    const imageUrl = `/uploads/${req.file.filename}`;
+
+    res.json({ imageUrl }); // Send the image URL to frontend
+});
+
+// Serve uploaded files
+app.use("/uploads", express.static("uploads"));
+
+// Start Server
+app.listen(5000, () => {
+    console.log("Server running on http://localhost:5000");
 });
 
 // ====================== PROJECT FEED ======================

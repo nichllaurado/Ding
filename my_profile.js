@@ -14,7 +14,26 @@ function previewImage(event) {
         };
 
         reader.readAsDataURL(file); // Convert image to data URL
+        uploadImage(file);
     }
+}
+
+function uploadImage(file) {
+    let formData = new FormData();
+    formData.append("profileImage", file); // Append file as 'profileImage'
+
+    fetch("/upload", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.imageUrl) {
+            document.getElementById("profileImage").src = data.imageUrl;
+            localStorage.setItem("profilePic", data.imageUrl); // Store the image URL
+        }
+    })
+    .catch(error => console.error("Error uploading image:", error));
 }
 
 function toggleEdit() {
