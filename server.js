@@ -61,9 +61,16 @@ const s3 = new S3Client({
     }
 });
 
-const upload = multer({ storage: multer.memoryStorage() });
+const videoStorage = multer.diskStorage({
+    destination: "./uploads/", // Folder to store images
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
+    }
+});
 
-app.post('/upload', upload.single('video'), async (req, res) => {
+const videoUpload = multer({ storage: multer.memoryStorage() });
+
+app.post('/upload-video', upload.single('video'), async (req, res) => {
     const file = req.file;
     const fileName = `uploads/${Date.now()}_${file.originalname}`;
 
@@ -85,15 +92,17 @@ app.post('/upload', upload.single('video'), async (req, res) => {
 });
 
 // ====================== IMAGE UPLOAD ======================
-const storage = multer.diskStorage({
+const imageStorage = multer.diskStorage({
     destination: "./uploads/", // Folder to store images
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
     }
 });
 
+const imageUpload = multer({ storage: multer.memoryStorage() });
+
 // Handle Image Upload
-app.post("/upload", upload.single("profileImage"), (req, res) => {
+app.post("/upload-pfp", upload.single("profileImage"), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: "No file uploaded" });
     }

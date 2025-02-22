@@ -22,7 +22,7 @@ function uploadImage(file) {
     let formData = new FormData();
     formData.append("profileImage", file); // Append file as 'profileImage'
 
-    fetch("/upload", {
+    fetch("/upload-pfp", {
         method: "POST",
         body: formData
     })
