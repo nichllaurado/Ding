@@ -5,10 +5,17 @@ document.getElementById("userForm").addEventListener("submit", async function(ev
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
+    // Object containing user info
+    const user = {
+      name,
+      email,
+      password
+    };
+
     const response = await fetch("/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password })
+      body: JSON.stringify(user)
     });
 
     const result = await response.json();
