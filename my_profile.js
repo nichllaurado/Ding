@@ -1,9 +1,21 @@
 
-
 function changePicture() {
-
+    document.getElementById("fileInput").click();
 }
 
+function previewImage(event) {
+    const file = event.target.files[0]; // Get the selected file
+    if (file) {
+        const reader = new FileReader();
+
+        // Read the file and set it as the image source
+        reader.onload = function(e) {
+            document.getElementById("profileImage").src = e.target.result;
+        };
+
+        reader.readAsDataURL(file); // Convert image to data URL
+    }
+}
 
 function toggleEdit() {
     let box = document.getElementById("biographyBox");
@@ -15,7 +27,12 @@ function toggleEdit() {
     }
 }
 
-
+window.onload = function() {
+    const savedImage = localStorage.getItem("profilePic");
+    if (savedImage) {
+        document.getElementById("profileImage").src = savedImage;
+    }
+};
 
 function addItem() {
     let list = document.getElementById("list");
