@@ -1,9 +1,18 @@
 // NEED TO UPDATE WITH AWS API KEY AND PUT "apikey": "key" IN headers FOR ALL FETCH REQS (GET AND POST)
+const API_BASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_KEY;
+
 document.addEventListener("DOMContentLoaded", async function () {
     const projectsContainer = document.getElementById("projects-container");
 
     try {
-        const response = await fetch("http://localhost:3000/api/projects");
+        const response = await fetch(`${API_BASE_URL}/projects`, {
+            method: 'GET',
+            headers: {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Content-Type': 'application/json' }
+        });
         if (!response.ok) throw new Error("Failed to fetch projects");
 
         const projects = await response.json();

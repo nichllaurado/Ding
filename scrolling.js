@@ -1,3 +1,6 @@
+const API_BASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_KEY;
+
 // NEED TO UPDATE WITH AWS API KEY AND PUT "apikey": "key" IN headers FOR ALL FETCH REQS (GET AND POST)
 document.addEventListener('DOMContentLoaded', function () {
     const feedContainer = document.getElementById('feed');
@@ -10,7 +13,13 @@ document.addEventListener('DOMContentLoaded', function () {
         loading = true;
 
         try {
-            const response = await fetch(`http://localhost:3000/feed?limit=${limit}&offset=${offset}`);
+            const response = await fetch(`${API_BASE_URL}/projects?limit=${limit}&offset=${offset}`, {
+                method: 'GET',
+                headers: {
+                    'apikey': SUPABASE_ANON_KEY,
+                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                    'Content-Type': 'application/json' }
+            });
             const data = await response.json();
 
             if (data.feed.length === 0) {

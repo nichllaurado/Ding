@@ -1,3 +1,6 @@
+const API_BASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_KEY;
+
 document.getElementById("userForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
@@ -13,9 +16,12 @@ document.getElementById("userForm").addEventListener("submit", async function(ev
     };
 
     // NEED TO UPDATE WITH AWS API KEY AND PUT "apikey": "key" IN headers FOR ALL FETCH REQS (GET AND POST)
-    const response = await fetch("/signup", {
+    const response = await fetch(`${API_BASE_URL}/signup`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json' },
       body: JSON.stringify(user)
     });
 

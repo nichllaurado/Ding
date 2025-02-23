@@ -1,3 +1,5 @@
+const API_BASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_KEY;
 
 function changePicture() {
     document.getElementById("fileInput").click();
@@ -23,9 +25,13 @@ function uploadImage(file) {
     let formData = new FormData();
     formData.append("profileImage", file); // Append file as 'profileImage'
 
-    fetch("/upload-pfp", {
+    fetch(`${API_BASE_URL}/upload-pfp`, {
         method: "POST",
-        body: formData
+        headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json' },
+        body: JSON.stringify(projectData),
     })
     .then(response => response.json())
     .then(data => {
