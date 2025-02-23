@@ -1,180 +1,110 @@
-const express = require('express');
-const path = require('path');
-const { Pool } = require('pg');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const cors = require('cors');
-const multer = require('multer');
-const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
-const http = require('http');
-const socketIo = require('socket.io');
-const asyncHandler = require('express-async-handler');
-require('dotenv').config();
+import express from "express";
+import cors from "cors";
+import { createClient } from "@supabase/supabase-js";
+import dotenv from "dotenv";
+import http from "http";
+import { Server } from "socket.io";
+import multer from "multer";
+
+dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server, { cors: { origin: '*' } });
+const io = new Server(server, { cors: { origin: "*" } });
 
 app.use(express.json());
 app.use(cors());
 
-// ====================== DATABASE CONNECTION ======================
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+// ====================== SUPABASE CONNECTION ======================
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
 
 // ====================== AUTHENTICATION ======================
-app.post('/register', asyncHandler(async (req, res) => {
+app.post("/register", async (req, res) => {
     const { name, email, password } = req.body;
-    if (!name || !email || !password) return res.status(400).json({ error: 'All fields required' });
+    if (!name || !email || !password) return res.status(400).json({ error: "All fields required" });
 
-    const existingUser = await pool.query('SELECT id FROM users WHERE email = $1', [email]);
-    if (existingUser.rows.length > 0) return res.status(400).json({ error: 'Email already in use' });
+    const { user, error } = await supabase.auth.signUp({ email, password });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await pool.query(
-        'INSERT INTO users (name, email, password_hash) VALUES ($1, $2, $3) RETURNING id, name, email',
-        [name, email, hashedPassword]
-    );
+    if (error) return res.status(400).json({ error: error.message });
 
-    const token = jwt.sign({ user_id: newUser.rows[0].id }, process.env.JWT_SECRET, { expiresIn: '7d' });
-    res.json({ token, user: newUser.rows[0] });
-}));
+    await supabase.from("users").insert([{ id: user.id, name, email, profile_picture: null }]);
 
-app.post('/login', asyncHandler(async (req, res) => {
+    res.json({ user });
+});
+
+app.post("/login", async (req, res) => {
     const { email, password } = req.body;
-    const userResult = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-    if (userResult.rows.length === 0) return res.status(400).json({ error: 'Invalid credentials' });
 
-    const user = userResult.rows[0];
-    const isValidPassword = await bcrypt.compare(password, user.password_hash);
-    if (!isValidPassword) return res.status(400).json({ error: 'Invalid credentials' });
+    const { user, error } = await supabase.auth.signInWithPassword({ email, password });
 
-    const token = jwt.sign({ user_id: user.id }, process.env.JWT_SECRET, { expiresIn: '7d' });
-    res.json({ token, user: { id: user.id, name: user.name, email: user.email } });
-}));
+    if (error) return res.status(400).json({ error: error.message });
 
-// ====================== VIDEO UPLOAD (AWS S3) ======================
-const s3 = new S3Client({
-    region: 'us-east-1',
-    credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_KEY
-    }
+    res.json({ user });
 });
 
-const videoStorage = multer.diskStorage({
-    destination: "./uploads/", // Folder to store images
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
-    }
+// ====================== FILE UPLOADS (SUPABASE STORAGE) ======================
+
+// Multer configuration
+const upload = multer({ storage: multer.memoryStorage() });
+
+// Upload profile picture
+app.post("/upload-pfp", upload.single("profileImage"), async (req, res) => {
+    if (!req.file) return res.status(400).json({ error: "No file uploaded" });
+
+    const user = supabase.auth.getUser();
+    if (!user) return res.status(401).json({ error: "Unauthorized" });
+
+    const fileName = `pfp-${user.id}-${Date.now()}.${req.file.mimetype.split("/")[1]}`;
+    const filePath = `profile_picture/${fileName}`;
+
+    const { error } = await supabase.storage.from("profile_picture").upload(filePath, req.file.buffer, { upsert: true });
+
+    if (error) return res.status(500).json({ error: "Failed to upload image" });
+
+    const { data } = supabase.storage.from("profile_picture").getPublicUrl(filePath);
+
+    await supabase.from("users").update({ profile_picture: data.publicUrl }).eq("id", user.id);
+
+    res.json({ imageUrl: data.publicUrl });
 });
 
-const videoUpload = multer({ storage: multer.memoryStorage() });
+// Upload video
+app.post("/upload-video", upload.single("video"), async (req, res) => {
+    if (!req.file) return res.status(400).json({ error: "No video uploaded" });
 
-app.post('/upload-video', upload.single('video'), async (req, res) => {
-    const file = req.file;
-    const fileName = `uploads/${Date.now()}_${file.originalname}`;
+    const user = supabase.auth.getUser();
+    if (!user) return res.status(401).json({ error: "Unauthorized" });
 
-    const params = {
-        Bucket: 'ding-videos',
-        Key: fileName,
-        Body: file.buffer,
-        ACL: 'public-read',
-        ContentType: file.mimetype,
-    };
+    const fileName = `video-${user.id}-${Date.now()}.${req.file.mimetype.split("/")[1]}`;
+    const filePath = `video/${fileName}`;
 
-    try {
-        await s3.send(new PutObjectCommand(params));
-        res.json({ videoUrl: `https://ding-videos.s3.amazonaws.com/${fileName}` });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Failed to upload video' });
-    }
+    const { error } = await supabase.storage.from("video").upload(filePath, req.file.buffer, { upsert: true });
+
+    if (error) return res.status(500).json({ error: "Failed to upload video" });
+
+    const { data } = supabase.storage.from("video").getPublicUrl(filePath);
+
+    res.json({ videoUrl: data.publicUrl });
 });
 
-// ====================== IMAGE UPLOAD ======================
-const imageStorage = multer.diskStorage({
-    destination: "./uploads/", // Folder to store images
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
-    }
-});
+// ====================== REAL-TIME CHAT (SUPABASE + SOCKET.IO) ======================
+io.on("connection", (socket) => {
+    console.log("User connected:", socket.id);
 
-const imageUpload = multer({ storage: multer.memoryStorage() });
-
-// Handle Image Upload
-app.post("/upload-pfp", upload.single("profileImage"), (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ error: "No file uploaded" });
-    }
-
-    // Construct the image URL
-    const imageUrl = `/uploads/${req.file.filename}`;
-
-    res.json({ imageUrl }); // Send the image URL to frontend
-});
-
-// Serve uploaded files
-app.use("/uploads", express.static("uploads"));
-
-// Start Server
-app.listen(5000, () => {
-    console.log("Server running on http://localhost:5000");
-});
-
-// ====================== PROJECT FEED ======================
-app.post('/projects', upload.single('video'), asyncHandler(async (req, res) => {
-    const { user_id, title, description, tags } = req.body;
-    const video_url = req.file ? req.file.location : null;
-
-    await pool.query(
-        'INSERT INTO projects (user_id, title, description, video_url, tags) VALUES ($1, $2, $3, $4, $5)',
-        [user_id, title, description, video_url, tags]
-    );
-    res.json({ message: 'Project created' });
-}));
-
-app.get('/feed', asyncHandler(async (req, res) => {
-    const limit = parseInt(req.query.limit) || 5;
-    const offset = parseInt(req.query.offset) || 0;
-    
-    const result = await pool.query(
-        'SELECT projects.*, users.name FROM projects JOIN users ON projects.user_id = users.id ORDER BY projects.created_at DESC LIMIT $1 OFFSET $2',
-        [limit, offset]
-    );
-
-    res.json({ feed: result.rows });
-}));
-
-// ====================== REAL-TIME CHAT ======================
-io.on('connection', (socket) => {
-    console.log('User connected:', socket.id);
-
-    socket.on('chatMessage', async (data) => {
+    socket.on("chatMessage", async (data) => {
         const { sender_id, receiver_id, message } = data;
         try {
-            const result = await pool.query(
-                'INSERT INTO messages (sender_id, receiver_id, content) VALUES ($1, $2, $3) RETURNING *',
-                [sender_id, receiver_id, message]
-            );
-            io.emit('chatMessage', { sender_id, receiver_id, message: result.rows[0].content });
+            const { error } = await supabase.from("messages").insert([{ sender_id, receiver_id, content: message }]);
+            if (!error) io.emit("chatMessage", { sender_id, receiver_id, message });
         } catch (error) {
-            console.error('Error sending message:', error);
+            console.error("Error sending message:", error);
         }
     });
 
-    socket.on('disconnect', () => {
-        console.log('User disconnected:', socket.id);
+    socket.on("disconnect", () => {
+        console.log("User disconnected:", socket.id);
     });
 });
-
-app.get('/messages/:user1/:user2', asyncHandler(async (req, res) => {
-    const { user1, user2 } = req.params;
-    const result = await pool.query(
-        'SELECT * FROM messages WHERE (sender_id = $1 AND receiver_id = $2) OR (sender_id = $2 AND receiver_id = $1) ORDER BY created_at ASC',
-        [user1, user2]
-    );
-    res.json(result.rows);
-}));
 
 // ====================== SERVER START ======================
 const PORT = process.env.PORT || 3000;
