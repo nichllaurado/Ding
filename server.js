@@ -5,12 +5,27 @@ import dotenv from "dotenv";
 import http from "http";
 import { Server } from "socket.io";
 import multer from "multer";
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Serve static files (CSS, JS) from root
+app.use(express.static(__dirname));
+
+// Serve `index.html` for the root route
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "home.html"));
+});
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "home.html"));
+});
 
 app.use(express.json());
 app.use(cors());
