@@ -2,8 +2,12 @@ CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash TEXT NOT NULL,  
-    preferences JSONB DEFAULT '{}'::JSONB,  
+    username VARCHAR(255) UNIQUE NOT NULL,
+    pfp_url TEXT NOT NULL, -- Profile picture
+    biography TEXT,
+    skills TEXT[], -- Helps link users for project collaboration via algorithms
+    password_hash TEXT NOT NULL,
+    preferences JSONB DEFAULT '{}'::JSONB,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
