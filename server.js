@@ -15,6 +15,10 @@ const io = new Server(server, { cors: { origin: "*" } });
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (req, res) => {
+    res.send("Server is running!");
+});
+
 // ====================== SUPABASE CONNECTION ======================
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
 
