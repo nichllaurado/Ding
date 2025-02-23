@@ -68,6 +68,7 @@ async function updateProfileImageInDB(imageUrl) {
 async function loadProfilePicture() {
     try {
         const response = await fetch(`${API_BASE_URL}/rest/v1/users?select=profile_picture`, {
+            method: "GET",
             headers: {
                 'apikey': SUPABASE_ANON_KEY,
                 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
