@@ -1,6 +1,10 @@
+import { createClient } from '@supabase/supabase-js';
+
 const API_BASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_KEY;
 const SUPABASE_STORAGE_BUCKET = "profile_picture";
+
+const supabase = createClient(API_BASE_URL, SUPABASE_ANON_KEY);
 
 function changePicture() {
     document.getElementById("fileInput").click();
@@ -10,81 +14,82 @@ function previewImage(event) {
     const file = event.target.files[0]; // Get the selected file
     if (file) {
         const reader = new FileReader();
-
-        // Read the file and set it as the image source
         reader.onload = function(e) {
             document.getElementById("profileImage").src = e.target.result;
         };
-
-        reader.readAsDataURL(file); // Convert image to data URL
+        reader.readAsDataURL(file);
         uploadImage(file);
     }
 }
 
 async function uploadImage(file) {
-    const fileName = `pfp-${Date.now()}-${file.name}`;
-    const filePath = `${SUPABASE_STORAGE_BUCKET}/${fileName}`;
-    
-    try {
-        const response = await fetch(`${API_BASE_URL}/storage/v1/object/${filePath}`, {
-            method: "POST",
-            headers: {
-                'apikey': SUPABASE_ANON_KEY,
-                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                'Content-Type': file.type
-            },
-            body: file
-        });
-
-        if (!response.ok) throw new Error("Failed to upload image");
-
-        const imageUrl = `${API_BASE_URL}/storage/v1/object/public/${filePath}`;
-        await updateProfileImageInDB(imageUrl);
-    } catch (error) {
-        console.error("Error uploading image:", error);
+    const user = supabase.auth.user(); // Get logged-in user
+    if (!user) {
+        alert("You must be logged in to upload a profile picture.");
+        return;
     }
+
+    const fileName = `pfp-${user.id}-${Date.now()}.${file.name.split('.').pop()}`;
+    const filePath = `${SUPABASE_STORAGE_BUCKET}/${fileName}`;
+
+    // Upload image to Supabase Storage
+    const { error } = await supabase.storage
+        .from(SUPABASE_STORAGE_BUCKET)
+        .upload(filePath, file, { cacheControl: '3600', upsert: true });
+
+    if (error) {
+        console.error("Upload error:", error.message);
+        return;
+    }
+
+    // Generate public URL
+    const { publicURL } = supabase.storage
+        .from(SUPABASE_STORAGE_BUCKET)
+        .getPublicUrl(filePath);
+
+    if (!publicURL) {
+        console.error("Failed to generate public URL.");
+        return;
+    }
+
+    // Save profile picture URL in DB
+    await updateProfileImageInDB(publicURL);
 }
 
 async function updateProfileImageInDB(imageUrl) {
-    try {
-        const response = await fetch(`${API_BASE_URL}/rest/v1/users`, {
-            method: "PATCH",
-            headers: {
-                'apikey': SUPABASE_ANON_KEY,
-                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                'Content-Type': 'application/json',
-                'Prefer': 'return=representation'
-            },
-            body: JSON.stringify({ profile_picture: imageUrl })
-        });
+    const user = supabase.auth.user();
+    if (!user) return;
 
-        if (!response.ok) throw new Error("Failed to update profile picture in DB");
+    const { error } = await supabase
+        .from("users")
+        .update({ profile_picture: imageUrl })
+        .eq("id", user.id);
+
+    if (error) {
+        console.error("DB update error:", error.message);
+    } else {
         document.getElementById("profileImage").src = imageUrl;
-    } catch (error) {
-        console.error("Error updating profile picture in DB:", error);
     }
 }
 
 async function loadProfilePicture() {
-    try {
-        const response = await fetch(`${API_BASE_URL}/rest/v1/users?select=profile_picture`, {
-            method: "GET",
-            headers: {
-                'apikey': SUPABASE_ANON_KEY,
-                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                'Content-Type': 'application/json'
-            }
-        });
+    const user = supabase.auth.user();
+    if (!user) return;
 
-        const data = await response.json();
-        if (data.length > 0 && data[0].profile_picture) {
-            document.getElementById("profileImage").src = data[0].profile_picture;
-        }
-    } catch (error) {
-        console.error("Error fetching profile picture:", error);
+    const { data, error } = await supabase
+        .from("users")
+        .select("profile_picture")
+        .eq("id", user.id)
+        .single();
+
+    if (error) {
+        console.error("Error fetching profile picture:", error.message);
+        return;
+    }
+
+    if (data.profile_picture) {
+        document.getElementById("profileImage").src = data.profile_picture;
     }
 }
 
-window.onload = function() {
-    loadProfilePicture();
-};
+window.onload = loadProfilePicture;
