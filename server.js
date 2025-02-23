@@ -3,7 +3,7 @@ import cors from "cors";
 import { createClient } from "@supabase/supabase-js";
 import dotenv from "dotenv";
 import http from "http";
-import { Server } from "socket.io";
+// import { Server } from "socket.io";  UNCOMMENT ONCE MESSAGING WORKS
 import multer from "multer";
 
 dotenv.config();
@@ -87,8 +87,8 @@ app.post("/upload-video", upload.single("video"), async (req, res) => {
     res.json({ videoUrl: data.publicUrl });
 });
 
-// ====================== REAL-TIME CHAT (SUPABASE + SOCKET.IO) ======================
-io.on("connection", (socket) => {
+// ====================== REAL-TIME CHAT (SUPABASE + SOCKET.IO) ======================  UNCOMMENT ONCE MESSAGING WORKS
+/* io.on("connection", (socket) => {
     console.log("User connected:", socket.id);
 
     socket.on("chatMessage", async (data) => {
@@ -104,7 +104,7 @@ io.on("connection", (socket) => {
     socket.on("disconnect", () => {
         console.log("User disconnected:", socket.id);
     });
-});
+}); */
 
 // ====================== SERVER START ======================
 const PORT = process.env.PORT || 3000;
