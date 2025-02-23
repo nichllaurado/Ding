@@ -18,6 +18,7 @@ function previewImage(event) {
     }
 }
 
+// NEED TO UPDATE WITH AWS API KEY AND PUT "apikey": "key" IN headers FOR ALL FETCH REQS (GET AND POST)
 function uploadImage(file) {
     let formData = new FormData();
     formData.append("profileImage", file); // Append file as 'profileImage'

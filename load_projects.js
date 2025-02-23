@@ -1,3 +1,4 @@
+// NEED TO UPDATE WITH AWS API KEY AND PUT "apikey": "key" IN headers FOR ALL FETCH REQS (GET AND POST)
 document.addEventListener("DOMContentLoaded", async function () {
     const projectsContainer = document.getElementById("projects-container");
 

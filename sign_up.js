@@ -12,6 +12,7 @@ document.getElementById("userForm").addEventListener("submit", async function(ev
       password
     };
 
+    // NEED TO UPDATE WITH AWS API KEY AND PUT "apikey": "key" IN headers FOR ALL FETCH REQS (GET AND POST)
     const response = await fetch("/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

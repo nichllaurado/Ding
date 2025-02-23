@@ -2,6 +2,7 @@ const socket = io('http://localhost:3000'); // Connect to WebSocket server
 const chatBox = document.getElementById('chat-box');
 const messageInput = document.getElementById('messageInput');
 
+// NEED TO UPDATE WITH AWS API KEY AND PUT "apikey": "key" IN headers FOR ALL FETCH REQS (GET AND POST)
 // Send messages
 async function sendMessage(receiverId) {
     const senderId = localStorage.getItem('user_id');

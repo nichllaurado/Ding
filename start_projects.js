@@ -1,3 +1,4 @@
+// NEED TO UPDATE WITH AWS API KEY AND PUT "apikey": "key" IN headers FOR ALL FETCH REQS (GET AND POST)
 document.getElementById('projectForm').addEventListener('submit', async function (event) {
     event.preventDefault();
 
@@ -40,6 +41,7 @@ document.getElementById('projectForm').addEventListener('submit', async function
     }
 });
 
+// NEED TO UPDATE WITH AWS API KEY AND PUT "apikey": "key" IN headers FOR ALL FETCH REQS (GET AND POST)
 async function uploadVideo(file) {
     let formData = new FormData();
     formData.append("video", file); // Append file as 'video'
