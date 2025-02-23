@@ -3,7 +3,7 @@ CREATE TABLE users (
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     username VARCHAR(255) UNIQUE NOT NULL,
-    profile_picture BYTEA, -- Profile picture
+    profile_picture TEXT, -- Profile picture
     biography TEXT,
     skills TEXT[], -- Helps link users for project collaboration via algorithms
     password_hash TEXT NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE projects (
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
     title VARCHAR(255) NOT NULL,
     description TEXT,
-    video BYTEA,  -- Video attached to the project
+    video TEXT,  -- Video attached to the project
     tags TEXT[],  -- Used for recommendation algorithms
     privacy_setting VARCHAR(20) CHECK (privacy_setting IN ('public', 'private', 'followers_only')) DEFAULT 'public',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

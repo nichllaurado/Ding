@@ -1,5 +1,6 @@
 const API_BASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_KEY;
+const SUPABASE_STORAGE_BUCKET = "profile_picture";
 
 function changePicture() {
     document.getElementById("fileInput").click();
@@ -20,62 +21,69 @@ function previewImage(event) {
     }
 }
 
-// NEED TO UPDATE WITH AWS API KEY AND PUT "apikey": "key" IN headers FOR ALL FETCH REQS (GET AND POST)
-function uploadImage(file) {
-    let formData = new FormData();
-    formData.append("profileImage", file); // Append file as 'profileImage'
+async function uploadImage(file) {
+    const fileName = `pfp-${Date.now()}-${file.name}`;
+    const filePath = `${SUPABASE_STORAGE_BUCKET}/${fileName}`;
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/storage/v1/object/${filePath}`, {
+            method: "POST",
+            headers: {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Content-Type': file.type
+            },
+            body: file
+        });
 
-    fetch(`${API_BASE_URL}/upload-pfp`, {
-        method: "POST",
-        headers: {
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-            'Content-Type': 'application/json' },
-        body: JSON.stringify(projectData),
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.imageUrl) {
-            document.getElementById("profileImage").src = data.imageUrl;
-            localStorage.setItem("profilePic", data.imageUrl); // Store the image URL
-        }
-    })
-    .catch(error => console.error("Error uploading image:", error));
+        if (!response.ok) throw new Error("Failed to upload image");
+
+        const imageUrl = `${API_BASE_URL}/storage/v1/object/public/${filePath}`;
+        await updateProfileImageInDB(imageUrl);
+    } catch (error) {
+        console.error("Error uploading image:", error);
+    }
 }
 
-function toggleEdit() {
-    let box = document.getElementById("biographyBox");
-    if (box.contentEditable === "true") {
-        box.contentEditable = "false";
-    } else {
-        box.contentEditable = "true";
-        box.focus();
+async function updateProfileImageInDB(imageUrl) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/rest/v1/users`, {
+            method: "PATCH",
+            headers: {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Content-Type': 'application/json',
+                'Prefer': 'return=representation'
+            },
+            body: JSON.stringify({ profile_picture: imageUrl })
+        });
+
+        if (!response.ok) throw new Error("Failed to update profile picture in DB");
+        document.getElementById("profileImage").src = imageUrl;
+    } catch (error) {
+        console.error("Error updating profile picture in DB:", error);
+    }
+}
+
+async function loadProfilePicture() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/rest/v1/users?select=profile_picture`, {
+            headers: {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+        if (data.length > 0 && data[0].profile_picture) {
+            document.getElementById("profileImage").src = data[0].profile_picture;
+        }
+    } catch (error) {
+        console.error("Error fetching profile picture:", error);
     }
 }
 
 window.onload = function() {
-    const savedImage = localStorage.getItem("profilePic");
-    if (savedImage) {
-        document.getElementById("profileImage").src = savedImage;
-    }
+    loadProfilePicture();
 };
-
-function addItem() {
-    let list = document.getElementById("list");
-    let newItem = document.createElement("li");
-    let itemText = prompt("Enter new item:");
-    
-    if (itemText) {
-        newItem.innerHTML = `<span>${itemText}</span> <button onclick="editItem(this)">Edit</button>`;
-        list.appendChild(newItem);
-    }
-}
-
-function editItem(button) {
-    let listItem = button.parentElement;
-    let newText = prompt("Edit item:", listItem.firstElementChild.textContent);
-    
-    if (newText !== null) {
-        listItem.firstElementChild.textContent = newText;
-    }
-}
