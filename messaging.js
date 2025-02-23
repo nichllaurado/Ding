@@ -1,6 +1,6 @@
 const API_BASE_URL = "https://ding-ggzr.onrender.com";
 
-const socket = io('http://localhost:3000'); // Connect to WebSocket server
+/* const socket = io('http://localhost:3000'); // Connect to WebSocket server
 const chatBox = document.getElementById('chat-box');
 const messageInput = document.getElementById('messageInput');
 
@@ -28,4 +28,4 @@ function displayMessage(message) {
     messageDiv.textContent = `${message.sender_id}: ${message.content}`;
     chatBox.appendChild(messageDiv);
 }
-
+*/
