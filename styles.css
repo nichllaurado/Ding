@@ -41,24 +41,17 @@ p {
     text-align: center;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 header {
     background-color: #3b3b38;
     color: whitesmoke;
     padding: 20px;
     text-align: center;
 }
-
-/* button {
-
-}
-
-:hover {
-
-}
-
-:disabled {
-
-} */
 
 nav ul {
     list-style: none;
@@ -94,7 +87,7 @@ form {
     border: 2px solid #3b3b38;
     background-color: #a020f0;
     margin: 2rem auto;
-    border-radius: 10px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -102,15 +95,15 @@ form {
 
 form label {
     color: #3b3b38;
-    font-size: 1.5vw;
+    font-size: 1.5rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 2vh auto 1vh auto;
     text-align: center;
-    flex: 1;
+    /* flex: 1; */
     vertical-align: middle;
 }
 
-form input {
+form input, form textarea {
     width: 100%;
     max-width: 400px;
     padding: 10px;
@@ -129,7 +122,7 @@ body.border-container {
     box-sizing: border-box;
 }
 
-.form-container {
+/* .form-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,7 +131,7 @@ body.border-container {
     margin-bottom: 20vh;
     margin: auto;
     border-radius: 5vw;
-}
+} */
 
 #home-icon {
     position: fixed;
@@ -147,16 +140,6 @@ body.border-container {
 #user-icon {
     position: fixed;
 }
-
-/* .fixed-buttons {
-    position: fixed;
-    left: 10px;
-    top: 10%;
-    transform: translateY(-20%);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-} */
 
 /* home logo button */
 .logo-button {
@@ -198,9 +181,8 @@ body.border-container {
     flex-direction: column;
     gap: 10px;
     position: absolute;
-    left: 10px;
-    top: 50px;
-    width: auto;
+    left: 0.45vw;
+    top: 4.9vw;
 }
 
 button {
@@ -226,22 +208,16 @@ button:hover, button:disabled {
     color: #3b3b38;
 }
 
-/* .sidebar button:hover {
-    background-color: #debded;
-    color: #a020f0;
+button:disabled {
+    cursor: not-allowed;
 }
-
-.sidebar button:disabled {
-    background-color: #debded;
-    color: #a020f0;
-} */
 
 /* search bar */
 .search-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2vh auto 2vh auto;
+    margin: 2vh auto;
 }
 
 .search-container input {
@@ -264,29 +240,6 @@ button:hover, button:disabled {
     cursor: pointer;
     font-size: 2vw;
 }
-
-/* .search-container button:hover {
-    background-color: #debdeb;
-} */
-
-/* .return button {
-    left: 10px;
-    width: 120px;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #a020f0;
-    color: whitesmoke;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 50px;
-    transition: background-color 0.3s ease;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-} */
-
-/* .return button:hover {
-    background-color: #debded;
-} */
 
 .start-project {
     justify-content: center;
@@ -314,10 +267,6 @@ button:hover, button:disabled {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-/* .start-project button:hover {
-    background-color: #debded;
-} */
-
 .center-image {
     display: block;
     margin: auto;
@@ -326,11 +275,6 @@ button:hover, button:disabled {
 
 .enlarge-image {
     width: 20vw;
-}
-
-label {
-    margin-top: 10px;
-    font-weight: bold;
 }
 
 input, textarea {
@@ -342,13 +286,14 @@ input, textarea {
 }
 
 label {
+    margin-top: 10px;
+    font-weight: bold;
     font-size: small;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-variant: small-caps;
     color: #3b3b38;
 }
 
-  
 .profile-container {
     display: flex;
     flex-direction: column;
@@ -365,8 +310,6 @@ label {
 }
 
 .profile-icon {
-    
-
     width: 4.5vw;
     height: 4.5vw;
     display: flex;
@@ -376,9 +319,6 @@ label {
     margin: auto;
     margin-top: 1vw;
     margin-bottom: 1vw;
-         
-
-
 }
 
 .profile-icon img {
@@ -415,7 +355,6 @@ label {
 }
 
 .analytics-title {
-    
     margin-bottom: 10px;
     text-align: start;
 }
@@ -427,17 +366,27 @@ label {
     padding-top: 20px;
 }
 
-    
-/* Submit & Return Buttons */
-/* button {
-    background-color: #56096c;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    margin-top: 10px;
-} */
+#chat-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#messageInput {
+    width: 80%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+#projects-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
 
 /* Mobile-Friendly Adjustments */
 @media (max-width: 600px) {
