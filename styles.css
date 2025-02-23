@@ -4,6 +4,7 @@
 
 html {
     overflow: auto;
+    font-size: 16px;
 }
 
 body {
@@ -12,30 +13,31 @@ body {
     padding: 0;
     background-color: whitesmoke;
     overflow: auto;
+    text-align: center;
 }
 
 h1 {
     color: #a020f0;
-    font-size: 2.5vw;
+    font-size: 2.5rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin: 7vh auto 7vh auto;
+    margin: 7vh auto;
     text-align: center;
 }
 
 h2 {
     color: #3b3b38;
-    font-size: 1.5vw;
+    font-size: 1.5rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin: 5vh auto 5vh auto;
+    margin: 5vh auto;
     text-align: center;
 }
 
 p {
-    font-size: 0.5pt;
+    font-size: 1rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #3b3b38;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin: 0 auto;
+    max-width: 80%;
     text-align: center;
 }
 
@@ -86,19 +88,16 @@ footer {
 }
 
 form {
-    width: 30%;
-    height: 50%;
-    max-width: 60%;
-    max-height: 100%;
+    width: 90%;
+    max-width: 500px;
+    padding: 2rem;
+    border: 2px solid #3b3b38;
+    background-color: #a020f0;
+    margin: 2rem auto;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     align-items: center;
-    padding: 2vw;
-    border: 0.5vw solid;
-    border-color: #3b3b38;
-    background-color: #a020f0;
-    margin: auto;
 }
 
 form label {
@@ -112,23 +111,13 @@ form label {
 }
 
 form input {
-    width: 60%;
-    height: 10%;
-    min-width: 60%;
-    max-width: 60%;
-    min-height: 10%;
-    max-height: 10%;
-    padding: 1vh 1vw;
-    border: 0.1vw solid #3b3b38;
-    border-radius: 80vw;
-    font-size: 1vw;
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #3b3b38;
+    border-radius: 5px;
+    font-size: 1rem;
     text-align: center;
-    vertical-align: middle;
-    line-height: 1vh;
-    align-items: center;
-    flex: 1;
-    box-sizing: border-box;
-    margin: auto;
 }
 
 body.border-container {
@@ -203,44 +192,33 @@ body.border-container {
     width: 3.5vw;
 }
 
-
-.return {
-
-}
-
 /* Sidebar styles */
-.sidebar, .return {
-    position: fixed;
-    left: 0.7vw;
-    top: 12vh; /* Adjusted position for visibility */
+.sidebar, .fixed-buttons, .return {
     display: flex;
     flex-direction: column;
-    gap: 1vh;
+    gap: 10px;
+    position: absolute;
+    left: 10px;
+    top: 50px;
+    width: auto;
 }
 
 button {
     background-color: #a020f0;
     color: whitesmoke;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
 /* Button styles */
 .sidebar button, .fixed-buttons button, .return button {
-    width: 7vw;
-    height: 1.4vw;
-    padding: 1vh 1vw;
-    font-size: 0.8vw;
-    /* background-color: #a020f0;
-    color: whitesmoke; */
-    border: 0.1vw solid #3b3b38;
-    cursor: pointer;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    line-height: 1vh;
-    display: flex;
-    border-radius: 80vw; /* Round buttons */
-    transition: background-color 0.3s ease;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 100px;
+    font-size: 0.9rem;
+    padding: 10px;
 }
 
 button:hover, button:disabled {
@@ -451,7 +429,7 @@ label {
 
     
 /* Submit & Return Buttons */
-button {
+/* button {
     background-color: #56096c;
     color: white;
     padding: 10px 15px;
@@ -459,8 +437,28 @@ button {
     border-radius: 50px;
     cursor: pointer;
     margin-top: 10px;
-}
+} */
 
+/* Mobile-Friendly Adjustments */
+@media (max-width: 600px) {
+    h1, h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    form {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
 
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
