@@ -33,30 +33,9 @@
     <input id="messageInput" autocomplete="off" placeholder="Type a message...">
     <button onclick="sendMessage()">Send</button>
 
-    <script>
-        const socket = io();
-
-        // Function to send a message
-        function sendMessage() {
-            const input = document.getElementById("messageInput");
-            const message = input.value.trim();
-            if (message) {
-                socket.emit("chat message", message);
-                input.value = "";
-            }
-        }
-
-        // Listen for incoming messages
-        socket.on("chat message", (msg) => {
-            const messages = document.getElementById("messages");
-            const li = document.createElement("li");
-            li.textContent = msg;
-            messages.appendChild(li);
-        });
-    </script>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script src="message.js"></script>
+    <script src="messaging.js"></script>
     <script src="navigation.js"></script>
 </body>
 </html>
