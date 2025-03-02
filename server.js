@@ -15,9 +15,19 @@ const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false, // Required for Supabase on Render
+    },
+});
 
 // Serve static files (CSS, JS) from root
 app.use(express.static(__dirname));
+
+app.use(bodyParser.json());
+
+app.use(express.static(path.join(__dirname, "public")));
 
 // Serve `index.html` for the root route
 app.get("/", (req, res) => {
