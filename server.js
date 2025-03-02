@@ -26,6 +26,7 @@ const pool = new Pool({
 
 // Serve static files (CSS, JS) from root
 app.use(express.static(__dirname));
+app.use(express.json())
 
 // Serve `index.html` for the root route
 app.get("/", (req, res) => {
