@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { createClient } from "@supabase/supabase-js";
+const { createClient } = await import ("@supabase/supabase-js");
 import dotenv from "dotenv";
 import http from "http";
 import { Server } from "socket.io";
