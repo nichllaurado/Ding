@@ -117,21 +117,19 @@ app.post("${API_URL}/upload-video", upload.single("video"), async (req, res) => 
 });
 
 // ====================== REAL-TIME CHAT (SUPABASE + SOCKET.IO) ======================
-io.on("connection", (socket) => {
-    console.log("User connected:", socket.id);
+io.on('connection', (socket) => {
+    console.log('A user connected:', socket.id);
 
-    socket.on("chatMessage", async (data) => {
-        const { sender_id, receiver_id, message } = data;
-        try {
-            const { error } = await supabase.from("messages").insert([{ sender_id, receiver_id, content: message }]);
-            if (!error) io.emit("chatMessage", { sender_id, receiver_id, message });
-        } catch (error) {
-            console.error("Error sending message:", error);
-        }
+    // Receive a message from a client
+    socket.on('chat message', (msg) => {
+        console.log('Message received:', msg);
+        
+        // Broadcast message to all connected clients
+        io.emit('chat message', msg);
     });
 
-    socket.on("disconnect", () => {
-        console.log("User disconnected:", socket.id);
+    socket.on('disconnect', () => {
+        console.log('User disconnected:', socket.id);
     });
 });
 
