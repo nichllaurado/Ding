@@ -15,6 +15,7 @@ const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+
 // Serve static files (CSS, JS) from root
 app.use(express.static(__dirname));
 
@@ -29,6 +30,7 @@ app.get("*", (req, res) => {
 
 app.use(express.json());
 app.use(cors());
+app.use(express.urlencoded({ extended: true })); // Handle form data
 
 app.get("/", (req, res) => {
     res.send("Server is running!");
@@ -38,7 +40,9 @@ app.get("/", (req, res) => {
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
 
 // ====================== AUTHENTICATION ======================
-app.post("/register", async (req, res) => {
+const API_URL = "https://ding-ggzr.onrender.com";
+
+app.post("${API_URL}/register", async (req, res) => {
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {

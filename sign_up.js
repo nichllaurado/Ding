@@ -1,6 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+const SUPABASE_URL = "https://ldumvdowufraqlnxzism.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkdW12ZG93dWZyYXFsbnh6aXNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAyOTY1OTgsImV4cCI6MjA1NTg3MjU5OH0.9-tmroLirvetUJNPhRBvpc2D7g26FtoqCbtQgWrlLOI";
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 document.getElementById("userForm").addEventListener("submit", async function (event) {
     event.preventDefault();
