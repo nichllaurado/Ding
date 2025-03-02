@@ -7,6 +7,8 @@ import { Server } from "socket.io";
 import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
+import pkg from "pg";
+const { Pool } = pkg;
 
 dotenv.config();
 
@@ -57,7 +59,7 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANO
 // ====================== AUTHENTICATION ======================
 const API_URL = "https://ding-ggzr.onrender.com";
 
-app.post("${API_URL}/register", async (req, res) => {
+app.post("/register", async (req, res) => {
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
@@ -87,7 +89,7 @@ app.post("${API_URL}/register", async (req, res) => {
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Upload profile picture
-app.post("${API_URL}/upload-pfp", upload.single("profileImage"), async (req, res) => {
+app.post("/upload-pfp", upload.single("profileImage"), async (req, res) => {
     if (!req.file) return res.status(400).json({ error: "No file uploaded" });
 
     const user = supabase.auth.getUser();
@@ -108,7 +110,7 @@ app.post("${API_URL}/upload-pfp", upload.single("profileImage"), async (req, res
 });
 
 // Upload video
-app.post("${API_URL}/upload-video", upload.single("video"), async (req, res) => {
+app.post("/upload-video", upload.single("video"), async (req, res) => {
     if (!req.file) return res.status(400).json({ error: "No video uploaded" });
 
     const user = supabase.auth.getUser();
