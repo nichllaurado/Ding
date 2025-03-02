@@ -40,25 +40,28 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANO
 // ====================== AUTHENTICATION ======================
 app.post("/register", async (req, res) => {
     const { name, email, password } = req.body;
-    if (!name || !email || !password) return res.status(400).json({ error: "All fields required" });
 
-    const { user, error } = await supabase.auth.signUp({ email, password });
+    if (!name || !email || !password) {
+        return res.status(400).json({ error: "All fields are required" });
+    }
 
-    if (error) return res.status(400).json({ error: error.message });
+    // Sign up the user in Supabase Authentication
+    const { data, error } = await supabase.auth.signUp({ email, password });
 
-    await supabase.from("users").insert([{ id: user.id, name, email, profile_picture: null }]);
+    if (error) {
+        return res.status(400).json({ error: error.message });
+    }
 
-    res.json({ user });
-});
+    // Insert user into "users" table in Supabase
+    const { error: insertError } = await supabase.from("users").insert([
+        { id: data.user.id, name, email, profile_picture: null }
+    ]);
 
-app.post("/login", async (req, res) => {
-    const { email, password } = req.body;
+    if (insertError) {
+        return res.status(500).json({ error: "User created but failed to save profile." });
+    }
 
-    const { user, error } = await supabase.auth.signInWithPassword({ email, password });
-
-    if (error) return res.status(400).json({ error: error.message });
-
-    res.json({ user });
+    res.json({ message: "User registered successfully!", user: data.user });
 });
 
 // ====================== FILE UPLOADS (SUPABASE STORAGE) ======================
