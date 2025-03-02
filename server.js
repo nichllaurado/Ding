@@ -29,7 +29,12 @@ app.get("*", (req, res) => {
 });
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "https://ding-ggzr.onrender.com",
+    methods: "POST",
+    allowedHeaders: ["Content-Type"]
+}));
+
 app.use(express.urlencoded({ extended: true })); // Handle form data
 
 app.get("/", (req, res) => {
@@ -72,7 +77,7 @@ app.post("${API_URL}/register", async (req, res) => {
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Upload profile picture
-app.post("/upload-pfp", upload.single("profileImage"), async (req, res) => {
+app.post("${API_URL}/upload-pfp", upload.single("profileImage"), async (req, res) => {
     if (!req.file) return res.status(400).json({ error: "No file uploaded" });
 
     const user = supabase.auth.getUser();
@@ -93,7 +98,7 @@ app.post("/upload-pfp", upload.single("profileImage"), async (req, res) => {
 });
 
 // Upload video
-app.post("/upload-video", upload.single("video"), async (req, res) => {
+app.post("${API_URL}/upload-video", upload.single("video"), async (req, res) => {
     if (!req.file) return res.status(400).json({ error: "No video uploaded" });
 
     const user = supabase.auth.getUser();
