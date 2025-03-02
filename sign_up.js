@@ -1,6 +1,9 @@
-import { createClient } from "@supabase/supabase-js";
+const { createClient } = await import("@supabase/supabase-js");
 
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+const SUPABASE_URL = "https://ldumvdowufraqlnxzism.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxkdW12ZG93dWZyYXFsbnh6aXNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAyOTY1OTgsImV4cCI6MjA1NTg3MjU5OH0.9-tmroLirvetUJNPhRBvpc2D7g26FtoqCbtQgWrlLOI";
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const API_URL = "https://ding-ggzr.onrender.com";
 
 document.getElementById("userForm").addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -10,8 +13,7 @@ document.getElementById("userForm").addEventListener("submit", async function (e
     const password = document.getElementById("password").value;
 
     try {
-        // Send form data to the server
-        const response = await fetch("/register", {
+        const response = await fetch(`${API_URL}/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, password })
@@ -24,7 +26,7 @@ document.getElementById("userForm").addEventListener("submit", async function (e
         }
 
         alert("You're Signed Up!");
-        window.location.href = "home.html"; // Redirect after signup
+        window.location.href = "home.html";
     } catch (error) {
         document.getElementById("errorMessage").innerText = error.message;
     }
