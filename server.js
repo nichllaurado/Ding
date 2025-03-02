@@ -45,14 +45,12 @@ app.post("/register", async (req, res) => {
         return res.status(400).json({ error: "All fields are required" });
     }
 
-    // Sign up the user in Supabase Authentication
     const { data, error } = await supabase.auth.signUp({ email, password });
 
     if (error) {
         return res.status(400).json({ error: error.message });
     }
 
-    // Insert user into "users" table in Supabase
     const { error: insertError } = await supabase.from("users").insert([
         { id: data.user.id, name, email, profile_picture: null }
     ]);

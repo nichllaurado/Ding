@@ -9,24 +9,23 @@ document.getElementById("userForm").addEventListener("submit", async function (e
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    // Sign up the user in Supabase Authentication
-    const { data, error } = await supabase.auth.signUp({ email, password });
+    try {
+        // Send form data to the server
+        const response = await fetch("/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, password })
+        });
 
-    if (error) {
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || "Failed to register");
+        }
+
+        alert("You're Signed Up!");
+        window.location.href = "home.html"; // Redirect after signup
+    } catch (error) {
         document.getElementById("errorMessage").innerText = error.message;
-        return;
     }
-
-    // Insert user details into the database
-    const { error: insertError } = await supabase.from("users").insert([
-        { id: data.user.id, name, email, profile_picture: null }
-    ]);
-
-    if (insertError) {
-        document.getElementById("errorMessage").innerText = insertError.message;
-        return;
-    }
-
-    alert("You're Signed Up!");
-    window.location.href = "home.html"; // Redirect to home page after signup
 });
